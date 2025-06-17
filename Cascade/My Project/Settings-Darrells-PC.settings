@@ -1,0 +1,39 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="ConnectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=COMPAQ-NX6320\SQLEXPRESS;Initial Catalog=Cascade;User ID=Cascade;Password=Cascade</Value>
+    </Setting>
+    <Setting Name="HomeFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\Darrell\Documents\Cascade</Value>
+    </Setting>
+    <Setting Name="ResultsFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\Darrell\Documents\Cascade\Data\TAB\XML\Results</Value>
+    </Setting>
+    <Setting Name="ScheduleFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\Darrell\Documents\Cascade\Data\TAB\XML\Schedule</Value>
+    </Setting>
+    <Setting Name="ErrorFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\Darrell\Documents\Cascade\Errors</Value>
+    </Setting>
+    <Setting Name="LogFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\Darrell\Documents\Cascade\Logs</Value>
+    </Setting>
+    <Setting Name="LoadGreyhounds" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LoadGallops" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LoadHarness" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Token" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c77fe502-8ae7-4d5c-9c80-a70ff55af3ea</Value>
+    </Setting>
+    <Setting Name="NotCode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PSXG PSXR PSXT EXTG</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

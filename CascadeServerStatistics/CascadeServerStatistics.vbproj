@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>CascadeServerStatistics</RootNamespace>
+    <TargetFramework>net6.0-windows10.0.17763.0</TargetFramework>
+    <UseApplicationFramework>True</UseApplicationFramework>
+    <EnableVisualStyles>True</EnableVisualStyles>
+    <HighDpiMode>1</HighDpiMode>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineTrace>False</DefineTrace>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DefineTrace>False</DefineTrace>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineTrace>False</DefineTrace>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <DefineTrace>False</DefineTrace>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CascadeCommon\CascadeCommon.vbproj" />
+  </ItemGroup>
+
+</Project>

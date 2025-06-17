@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="LogFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\Darrell\OneDrive\Documents\Visual Studio 2022\Cascade\Logs</Value>
+    </Setting>
+    <Setting Name="ErrorFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\Darrell\OneDrive\Documents\Visual Studio 2022\Cascade\Errors</Value>
+    </Setting>
+    <Setting Name="ScheduleFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\Darrell\OneDrive\Documents\Visual Studio 2022\Cascade\Data\TAB\XML\Schedule</Value>
+    </Setting>
+    <Setting Name="ResultsFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\Darrell\OneDrive\Documents\Visual Studio 2022\Cascade\Data\TAB\XML\Results</Value>
+    </Setting>
+    <Setting Name="ConnectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=DARRELLS-PC;Initial Catalog=CascadeLive;Integrated Security=True;Connect Timeout=30</Value>
+    </Setting>
+    <Setting Name="Token" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c77fe502-8ae7-4d5c-9c80-a70ff55af3ea</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

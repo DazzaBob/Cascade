@@ -1,0 +1,147 @@
+﻿Imports System.Timers
+
+Friend NotInheritable Class Messages
+    Private ReadOnly LOGFOLDER As String
+    Private ReadOnly ERRORFOLDER As String
+    Private ReadOnly RTBMessages As RichTextBox
+    Private LOGTHIS As String
+    Private ALMessages As ArrayList
+    Private WithEvents LogTheMessagesTimer As System.Timers.Timer
+    Friend Sub New()
+        LOGFOLDER = My.Settings.LogFolder
+        ERRORFOLDER = My.Settings.ErrorFolder
+        RTBMessages = Nothing
+        LOGTHIS = Nothing
+        ALMessages = New ArrayList
+        LogTheMessagesTimer = New Timers.Timer(1000)
+    End Sub
+    Friend Sub New(ByRef RTBMessages As RichTextBox)
+        Me.New
+        Me.RTBMessages = RTBMessages
+        Call Me.LogTheMessagesTimer.Start()
+    End Sub
+    Friend Sub LogMessages(logText As String, type As Utils.BroadcastTypes)
+        LOGTHIS = Date.Now.ToShortDateString & " " & Date.Now.ToShortTimeString & " - "
+
+        Select Case type
+            Case Utils.BroadcastTypes.Log
+                LOGTHIS += "LOG: "
+            Case Utils.BroadcastTypes.Error
+                LOGTHIS += "ERR: "
+            Case Else
+                LOGTHIS += "UNK: "
+        End Select
+
+        LOGTHIS += "Thread (" & Environment.CurrentManagedThreadId.ToString & ") "
+        LOGTHIS += Strings.Left(logText, 2048)
+
+        Me.ALMessages.Add(New NewMessage(LOGTHIS, type))
+        If Me.RTBMessages IsNot Nothing Then Call UpdateUI()
+    End Sub
+    Private Sub UpdateUI()
+        If RTBMessages.InvokeRequired Then
+            Call RTBMessages.Invoke(New MethodInvoker(AddressOf UpdateUI))
+        Else
+            RTBMessages.SelectionStart = 0
+            RTBMessages.SelectionLength = 0
+            RTBMessages.SelectedText = LOGTHIS & Environment.NewLine
+            If RTBMessages.TextLength > 10240I Then
+                RTBMessages.SelectionStart = 10240
+                RTBMessages.SelectionLength = RTBMessages.TextLength - 10240
+                RTBMessages.SelectedText = String.Empty
+            End If
+        End If
+    End Sub
+    Private Sub LogTheMessagesTimer_Elapsed(sender As Object, e As ElapsedEventArgs) Handles LogTheMessagesTimer.Elapsed
+        If Me.ALMessages.Count = 0 Then Return
+        Me.LogTheMessagesTimer.Stop()
+
+        Do Until Me.ALMessages.Count = 0
+            Dim ThisMessage As NewMessage = Me.ALMessages(0)
+            Call StartLogging(ThisMessage.Message, ThisMessage.BrocastType)
+
+            Me.ALMessages.RemoveAt(0)
+        Loop
+
+        Me.LogTheMessagesTimer.Start()
+    End Sub
+#Region "       THE ACTUAL LOGGING "
+    Private Sub StartLogging(ByVal logthis As String, ByVal BroadcastType As Utils.BroadcastTypes)
+        Dim bLogThis() As Byte = System.Text.Encoding.UTF8.GetBytes(logthis & Environment.NewLine)
+
+        Select Case BroadcastType
+            Case Utils.BroadcastTypes.Log
+                Call WriteLog(bLogThis)
+            Case Utils.BroadcastTypes.Error
+                Call WriteLog(bLogThis)
+                Call WriteError(bLogThis)
+            Case Else
+                Return
+        End Select
+    End Sub
+    Private Sub WriteLog(bLogThis() As Byte)
+        Dim sDATE As String = FormatDateTime(Today, DateFormat.ShortDate)
+        sDATE = Replace(sDATE, "/", "_")
+        '
+        Try
+            If Not IO.File.Exists(LOGFOLDER & "\" & sDATE & ".log") Then
+                Using FS As New IO.FileStream(LOGFOLDER & "\" & sDATE & ".log", IO.FileMode.OpenOrCreate, IO.FileAccess.Write, IO.FileShare.ReadWrite)
+                    FS.Write(bLogThis, 0, bLogThis.Length)
+                    FS.Flush()
+                End Using
+            Else
+                Using FS As New IO.FileStream(LOGFOLDER & "\" & sDATE & ".log", IO.FileMode.Append, IO.FileAccess.Write, IO.FileShare.ReadWrite)
+                    FS.Write(bLogThis, 0, bLogThis.Length)
+                    FS.Flush()
+                End Using
+            End If
+        Catch ex As Exception
+            ' Whoops. we cant write the file.
+        End Try
+    End Sub
+    Private Sub WriteError(bLogThis() As Byte)
+        Dim sDATE As String = FormatDateTime(Today, DateFormat.ShortDate)
+        sDATE = Replace(sDATE, "/", "_")
+        '
+        If Not IO.File.Exists(ERRORFOLDER & "\" & sDATE & ".err") Then
+            Using FS As New IO.FileStream(ERRORFOLDER & "\" & sDATE & ".err", IO.FileMode.OpenOrCreate, IO.FileAccess.Write, IO.FileShare.ReadWrite)
+                FS.Write(bLogThis, 0, bLogThis.Length)
+                FS.Flush()
+            End Using
+        Else
+            Using FS As New IO.FileStream(ERRORFOLDER & "\" & sDATE & ".err", IO.FileMode.Append, IO.FileAccess.Write, IO.FileShare.ReadWrite)
+                FS.Write(bLogThis, 0, bLogThis.Length)
+                FS.Flush()
+            End Using
+        End If
+    End Sub
+#End Region
+    Private NotInheritable Class NewMessage
+        Private _BroadcastType As Utils.BroadcastTypes
+        Private _Message As String
+        Friend Sub New()
+            Me._BroadcastType = Utils.General.BroadcastTypes.None
+            Me._Message = String.Empty
+        End Sub
+        Friend Sub New(Message As String, BroadcastType As Utils.General.BroadcastTypes)
+            Me._BroadcastType = BroadcastType
+            Me._Message = Message
+        End Sub
+        Friend Property BrocastType As Utils.General.BroadcastTypes
+            Get
+                Return Me._BroadcastType
+            End Get
+            Set(value As Utils.General.BroadcastTypes)
+                Me._BroadcastType = value
+            End Set
+        End Property
+        Friend Property Message As String
+            Get
+                Return Me._Message
+            End Get
+            Set(value As String)
+                Me._Message = value
+            End Set
+        End Property
+    End Class
+End Class

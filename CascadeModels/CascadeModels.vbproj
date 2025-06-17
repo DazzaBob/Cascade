@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>CascadeModels</RootNamespace>
+    <TargetFramework>net6.0-windows10.0.17763.0</TargetFramework>
+    <UseApplicationFramework>True</UseApplicationFramework>
+    <HighDpiMode>1</HighDpiMode>
+    <ImportedNamespaces>CascadeCommon=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,CascadeModels=True</ImportedNamespaces>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineDebug>False</DefineDebug>
+    <DefineTrace>False</DefineTrace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineTrace>False</DefineTrace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CascadeCommon\CascadeCommon.vbproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Import Include="CascadeCommon" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="UserControls\UC_Model_Totals.vb" />
+    <Compile Update="UserControls\UC_RESULTS.vb" />
+  </ItemGroup>
+
+</Project>
