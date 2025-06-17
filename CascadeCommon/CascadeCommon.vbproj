@@ -6,7 +6,7 @@
     <UseApplicationFramework>True</UseApplicationFramework>
     <EnableVisualStyles>True</EnableVisualStyles>
     <HighDpiMode>1</HighDpiMode>
-    <ImportedNamespaces>System.Windows.Forms=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,CascadeCommon=True</ImportedNamespaces>
+    <ImportedNamespaces>Microsoft.Data.SqlClient=False,System.Windows.Forms=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,CascadeCommon=True</ImportedNamespaces>
     <SaveMySettingsOnExit>True</SaveMySettingsOnExit>
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
@@ -40,13 +40,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4">
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="4.14.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic" Version="4.6.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic" Version="4.14.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,6 +58,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Import Include="Microsoft.Data.SqlClient" />
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
 
